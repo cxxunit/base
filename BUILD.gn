@@ -50,6 +50,8 @@ if (is_win) {
       "/DELAYLOAD:cfgmgr32.dll",
       "/DELAYLOAD:powrprof.dll",
       "/DELAYLOAD:setupapi.dll",
+      "/DELAYLOAD:dbghelper.dll",
+      "/DELAYLOAD:shell32.dll",
     ]
   }
 }
@@ -115,7 +117,7 @@ component("base") {
   # reasons for this seem to involve obscure toolchain bugs. This should be
   # fixed and this target should always be a static_library in the
   # non-component case.
-  component_never_use_source_set = !is_nacl_nonsfi
+  # component_never_use_source_set = !is_nacl_nonsfi
 
   sources = [
     "allocator/allocator_check.cc",
@@ -1971,7 +1973,7 @@ test("base_unittests") {
   }
 
   # TODO(jschuh): crbug.com/167187 fix size_t to int truncations.
-  configs += [ "//build/config/compiler:no_size_t_to_int_warning" ]
+  # configs += [ "//build/config/compiler:no_size_t_to_int_warning" ]
 
   # Symbols for crashes when running tests on swarming.
   if (symbol_level > 0) {
